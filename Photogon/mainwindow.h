@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
-};
+    QTimer *tmrTimer;
 
-#endif // MAINWINDOW_H
+
+public slots:
+    void processFrameAndUpdateGUI();
+
+};

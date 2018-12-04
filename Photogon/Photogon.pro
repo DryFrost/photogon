@@ -6,6 +6,16 @@
 
 QT       += core gui
 
+QT_CONFIG -= no-pkg-config
+
+CONFIG += link_pkgconfig
+
+CONFIG += app_bundle
+
+PKGCONFIG += opencv
+
+LIBS += -L/usr/local/Cellar/opencv/3.4.3/lib/
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Photogon
