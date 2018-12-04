@@ -28,3 +28,5 @@ public slots:
     void processFrameAndUpdateGUI();
 
 };
+
+#endif // MAINWINDOW_H

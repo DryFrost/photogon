@@ -36,10 +36,14 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    computervision.cpp \
+    serverfind.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    computervision.h \
+    serverfind.h
 
 FORMS += \
         mainwindow.ui
