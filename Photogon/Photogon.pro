@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT += network
 QT_CONFIG -= no-pkg-config
 
 CONFIG += link_pkgconfig
@@ -38,12 +38,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     computervision.cpp \
-    serverfind.cpp
+    practicalsocket.cpp \
+    worker.cpp
 
 HEADERS += \
         mainwindow.h \
     computervision.h \
-    serverfind.h
+    practicalsocket.h \
+    worker.h \
+    config.h
 
 FORMS += \
         mainwindow.ui
