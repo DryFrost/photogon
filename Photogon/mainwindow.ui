@@ -6,67 +6,118 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>476</width>
-    <height>394</height>
+    <width>800</width>
+    <height>800</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1920</width>
+    <height>1080</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Photogon Main Men</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
-   <widget class="QLabel" name="labels3">
+   <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>330</x>
       <y>50</y>
-      <width>111</width>
-      <height>101</height>
+      <width>104</width>
+      <height>74</height>
      </rect>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="labels2">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>210</y>
-      <width>161</width>
-      <height>91</height>
+      <x>-1</x>
+      <y>390</y>
+      <width>741</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="labels3">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labels2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labels1">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>370</y>
+      <width>59</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>View 1</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labels1">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>60</y>
-      <width>131</width>
-      <height>111</height>
+      <x>330</x>
+      <y>370</y>
+      <width>59</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>Top View</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labels4">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>210</y>
-      <width>151</width>
-      <height>101</height>
+      <x>600</x>
+      <y>370</y>
+      <width>59</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>View 2</string>
     </property>
    </widget>
   </widget>
@@ -75,10 +126,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>476</width>
+     <width>800</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">

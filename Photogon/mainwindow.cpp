@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QtCore>
 #include <QDebug>
 #include <QThread>
 #include <QLabel>
@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     qRegisterMetaType< cv::Mat >("cv::Mat");
 
-    qDebug() << "Main thread " << QThread::currentThreadId();
     init();
+
 }
 
 MainWindow::~MainWindow()
@@ -60,8 +60,17 @@ void MainWindow::init()
 
 void MainWindow::displayFrame(cv::Mat frame, int index)
 {
-    cv::imshow(to_string(index),frame);
-    //QPixmap p = QPixmap::fromImage(QImage(frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888).rgbSwapped());
-    //p = p.scaled(QSize(frame.cols/2, frame.rows/2));
-    //labels[index]->setPixmap(p);
+    cv::Size size(241,199);
+    cv::resize(frame,frame,size);
+   // if(index =0){
+        QImage qimgOriginal((uchar*) frame.data,frame.cols,frame.rows,frame.step,QImage::Format_RGB888); // for color images
+        ui->labels1->setPixmap(QPixmap::fromImage(qimgOriginal));
+    //}else if (index = 1) {
+       // QImage qimgOriginal((uchar*) frame.data,frame.cols,frame.rows,frame.step,QImage::Format_RGB888); // for color images
+        ui->labels2->setPixmap(QPixmap::fromImage(qimgOriginal));
+    //}else{
+       // QImage qimgOriginal((uchar*) frame.data,frame.cols,frame.rows,frame.step,QImage::Format_RGB888); // for color images
+        ui->labels3->setPixmap(QPixmap::fromImage(qimgOriginal));
+    //}
+
 }

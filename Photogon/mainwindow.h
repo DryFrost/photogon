@@ -33,6 +33,7 @@ private:
     QLabel *labels[MAX_NUM_CAM];
     QThread* threads[MAX_NUM_CAM];
     Worker* workers[MAX_NUM_CAM];
+
 };
 
 #endif // MAINWINDOW_H
