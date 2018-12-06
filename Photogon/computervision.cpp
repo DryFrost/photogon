@@ -119,3 +119,58 @@ Mat get_color(Mat img,Mat mask){
 
     return hist;
 }
+
+Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
+
+    vector<Mat> bgr_planes;
+    split(img,bgr_planes);
+    int histSize = 256;
+    float range[] = {0,256};
+    const float* histRange = {range};
+    bool uniform = true; bool accumulate = false;
+    Mat b_hist, g_hist, r_hist;
+
+    calcHist( &bgr_planes[0], 1, 0, mask, b_hist, 1, &histSize, &histRange, uniform, accumulate );
+    calcHist( &bgr_planes[1], 1, 0, mask, g_hist, 1, &histSize, &histRange, uniform, accumulate );
+    calcHist( &bgr_planes[2], 1, 0, mask, r_hist, 1, &histSize, &histRange, uniform, accumulate );
+
+    int hist_w = 280; int hist_h = 200;
+    int bin_w = cvRound( (double) hist_w/histSize );
+
+    Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 0,0,0) );
+
+    for( int i = 1; i < histSize; i++ )
+    {
+            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(b_hist.at<float>(i-1)) ) ,
+                 Point( bin_w*(i), hist_h - cvRound(b_hist.at<float>(i)) ),
+                 Scalar( 255, 0, 0), 2, 8, 0  );
+            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(g_hist.at<float>(i-1)) ) ,
+                 Point( bin_w*(i), hist_h - cvRound(g_hist.at<float>(i)) ),
+                 Scalar( 0, 255, 0), 2, 8, 0  );
+            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(r_hist.at<float>(i-1)) ) ,
+                 Point( bin_w*(i), hist_h - cvRound(r_hist.at<float>(i)) ),
+                 Scalar( 0, 0, 255), 2, 8, 0  );
+    }
+
+    return histImage;
+
+}
+
+Mat ComputerVision::remove_background(Mat img){
+    Mat dest_lab;
+    cvtColor(img, dest_lab, CV_BGR2Lab);
+    vector<Mat> channels_lab;
+    split(dest_lab, channels_lab);
+    Mat pot_thresh1;
+    inRange(channels_lab[2],0,120,pot_thresh1);
+    Mat pot_thresh2;
+    inRange(channels_lab[2],135,200,pot_thresh2);
+    Mat pot_or;
+    bitwise_or(pot_thresh1,pot_thresh2,pot_or);
+    Mat pot_dilate;
+    dilate(pot_or, pot_dilate, Mat(), Point(-1, -1), 2, 1, 1);
+    Mat pot_erode;
+    erode(pot_dilate,pot_erode, Mat(), Point(-1, -1), 3, 1, 1);
+
+    return pot_erode;
+}

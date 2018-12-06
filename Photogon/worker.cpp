@@ -18,7 +18,7 @@ void Worker::readVideo(QString path)
     if (path.length() > 0)
         filepath = path;
 
-    cv::VideoCapture cap("http://192.168.0.36:8081");
+    cv::VideoCapture cap("http://10.211.55.7:8080/stream.wmv");
 
 
     cv::Mat frame;
