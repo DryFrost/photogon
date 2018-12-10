@@ -1,5 +1,7 @@
 ## Welcome to GitHub Pages
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cde18f3040414e65aec869e35da084d3)](https://app.codacy.com/app/DryFrost/photogon?utm_source=github.com&utm_medium=referral&utm_content=DryFrost/photogon&utm_campaign=Badge_Grade_Settings)
+
 You can use the [editor on GitHub](https://github.com/DryFrost/photogon/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
