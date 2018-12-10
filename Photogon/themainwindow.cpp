@@ -9,11 +9,12 @@ theMainWindow::theMainWindow(QWidget *parent):
     QMainWindow (parent),
     ui(new Ui::theMainWindow)
 {
+    int num=0;
     ui->setupUi(this);
     qRegisterMetaType<cv::Mat >("cv::Mat");
     init();
     show();
-    //startupDialog();
+    startupDialog();
 
 }
 
@@ -35,7 +36,7 @@ void theMainWindow::on_actionNew_Project_triggered()
 
 void theMainWindow::init()
 {
-    int num=0;
+
     numCams = 1;
     for(int i = 0; i < numCams; i++)
     {

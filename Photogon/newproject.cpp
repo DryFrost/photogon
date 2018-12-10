@@ -21,7 +21,7 @@ newProject::~newProject()
 void newProject::on_setDirectoryButton_clicked()
 {
 
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+    dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                  "/home",
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
@@ -42,19 +42,24 @@ void newProject::on_commandLinkButton_clicked()
 void newProject::on_pushButton_clicked()
 {
     ProjectName = ui->lineEdit->text();
-    QSettings setup("stuff.ini",QSettings::IniFormat);
-    qDebug() << ProjectName;
+    QString ProjectDir = dir+"/"+ProjectName+".ini";
+    QSettings setup(ProjectDir,QSettings::IniFormat);
     setup.setValue("projectName",QVariant::fromValue(ProjectName));
-    new theMainWindow();
-    close();
+    setup.setValue("numTreatments",QVariant::fromValue(numTreatments));
+    setup.setValue("numSamples",QVariant::fromValue(numSamples));
+    setup.setValue("projectDir",QVariant::fromValue(dir));
+    setup.setValue("treatmentList",QVariant::fromValue(treatmentList));
+    //new theMainWindow();
+    //close();
 }
 
 void newProject::on_pushButton_3_clicked()
 {
-    int numTreatments = ui->spinBox->value();
-    QStringList list = InputDialog::getStrings(this,numTreatments);
-    if(!list.isEmpty()){
-        qDebug() << list;
+    numTreatments = ui->spinBox->value();
+    numSamples = ui->spinBox_2->value();
+    treatmentList = InputDialog::getStrings(this,numTreatments);
+    if(!treatmentList.isEmpty()){
+        qDebug() << treatmentList;
     }
 
 }

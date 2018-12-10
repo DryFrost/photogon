@@ -17,6 +17,9 @@ public:
     ~newProject();
     QString ProjectName;
     QString dir;
+    int numTreatments;
+    int numSamples;
+    QStringList treatmentList;
 
 
 
