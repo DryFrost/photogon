@@ -8,8 +8,9 @@ class Worker : public QObject
 {
     Q_OBJECT
 public:
-    Worker(QString path, int id);
+    Worker(QString path, int id, bool b = true);
     ~Worker();
+    bool Stop;
 
 public slots:
     void readVideo(QString path = "");

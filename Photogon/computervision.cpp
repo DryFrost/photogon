@@ -134,7 +134,7 @@ Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
     calcHist( &bgr_planes[1], 1, 0, mask, g_hist, 1, &histSize, &histRange, uniform, accumulate );
     calcHist( &bgr_planes[2], 1, 0, mask, r_hist, 1, &histSize, &histRange, uniform, accumulate );
 
-    int hist_w = 280; int hist_h = 200;
+    int hist_w = 321; int hist_h = 111;
     int bin_w = cvRound( (double) hist_w/histSize );
 
     Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 0,0,0) );

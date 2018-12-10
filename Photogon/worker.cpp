@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QTime>
-Worker::Worker(QString path, int id) : filepath(path), index(id)
+Worker::Worker(QString path, int id, bool b) : filepath(path), index(id), Stop(b)
 {
 
 }
@@ -18,12 +18,13 @@ void Worker::readVideo(QString path)
     if (path.length() > 0)
         filepath = path;
 
-    cv::VideoCapture cap("http://10.211.55.7:8080/stream.wmv");
+    cv::VideoCapture cap(0);
 
 
     cv::Mat frame;
-    while (true)
+    while (Stop=true)
     {
+
         cap >> frame;
         if (frame.empty())
         {
@@ -33,9 +34,14 @@ void Worker::readVideo(QString path)
         }
 
 
+
+
         emit frameFinished(frame.clone(), index);
-        QThread::msleep(30);
+
+
+        QThread::msleep(40);
     }
+
 
     emit finished(index);
 }

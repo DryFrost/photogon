@@ -38,20 +38,51 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     computervision.cpp \
-    practicalsocket.cpp \
-    worker.cpp
+    worker.cpp \
+    windowstartup.cpp \
+    newproject.cpp \
+    themainwindow.cpp \
+    camera.cpp \
+    calibrationmask.cpp \
+    cameradiscovery.cpp \
+    myudp.cpp \
+    inputdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     computervision.h \
-    practicalsocket.h \
     worker.h \
-    config.h
+    windowstartup.h \
+    newproject.h \
+    themainwindow.h \
+    camera.h \
+    calibrationmask.h \
+    cameradiscovery.h \
+    myudp.h \
+    inputdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    testwindow.ui \
+    windowstartup.ui \
+    newproject.ui \
+    themainwindow.ui \
+    camera.ui \
+    calibrationmask.ui \
+    cameradiscovery.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+mac {
+    CONFIG += x86
+    plist.path = "$$DESTDIR/$$join(TARGET,,,.app)/Contents"
+    plist.files = Info.plist
+    INSTALLS += plist
+
+}
+
+RESOURCES += \
+    icons.qrc

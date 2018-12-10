@@ -3,9 +3,11 @@
 
 #include <QDialog>
 
-namespace Ui {
-class windowStartup;
-}
+
+#include "ui_windowstartup.h"
+
+
+class theMainWindow;
 
 class windowStartup : public QDialog
 {
@@ -14,6 +16,11 @@ class windowStartup : public QDialog
 public:
     explicit windowStartup(QWidget *parent = nullptr);
     ~windowStartup();
+
+private slots:
+    void on_createProjectButton_clicked();
+
+    void on_commandLinkButton_clicked();
 
 private:
     Ui::windowStartup *ui;

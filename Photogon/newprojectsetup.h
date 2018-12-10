@@ -15,6 +15,9 @@ public:
     explicit newProjectSetup(QWidget *parent = nullptr);
     ~newProjectSetup();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::newProjectSetup *ui;
 };

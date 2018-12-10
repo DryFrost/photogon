@@ -22,17 +22,22 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    cv::Mat Frm;
 
     void init();
 
 public slots:
     void displayFrame(cv::Mat frame, int index);
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     int numCams;
     QLabel *labels[MAX_NUM_CAM];
     QThread* threads[MAX_NUM_CAM];
     Worker* workers[MAX_NUM_CAM];
+    int num;
 
 };
 
