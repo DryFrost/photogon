@@ -32,7 +32,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++1z
+
+3QMAKE_CXXFLAGS += -std=c++17
+
+CONFIG+=sdk_no_version_check
 
 SOURCES += \
         main.cpp \
@@ -46,7 +50,10 @@ SOURCES += \
     calibrationmask.cpp \
     cameradiscovery.cpp \
     myudp.cpp \
-    inputdialog.cpp
+    inputdialog.cpp \
+    showmask.cpp \
+    showhistogram.cpp \
+    showshape.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -59,7 +66,10 @@ HEADERS += \
     calibrationmask.h \
     cameradiscovery.h \
     myudp.h \
-    inputdialog.h
+    inputdialog.h \
+    showmask.h \
+    showhistogram.h \
+    showshape.h
 
 FORMS += \
         mainwindow.ui \
@@ -69,7 +79,10 @@ FORMS += \
     themainwindow.ui \
     camera.ui \
     calibrationmask.ui \
-    cameradiscovery.ui
+    cameradiscovery.ui \
+    showmask.ui \
+    showhistogram.ui \
+    showshape.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

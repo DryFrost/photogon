@@ -56,21 +56,22 @@ vector<Point> keep_roi(Mat img,Point tl, Point br, Mat &mask){
     mask = kept_mask;
     return cc;
 }
-vector<double> get_shapes(vector<Point> cc,Mat mask){
+vector<double> ComputerVision::get_shapes(vector<Point> cc,Mat mask){
     //-- Get measurements
     Moments mom = moments(mask,true);
     double area = mom.m00;
-    vector<Point>hull;
     convexHull( Mat(cc), hull, false );
     double hull_verticies = hull.size();
     double hull_area = contourArea(Mat(hull));
     double solidity = area/hull_area;
     double perimeter = arcLength(Mat(cc),false);
-    double cmx = mom.m10 / mom.m00;
-    double cmy = mom.m01 / mom.m00;
+    cmx = mom.m10 / mom.m00;
+    cmy = mom.m01 / mom.m00;
     Rect boundRect = boundingRect( cc );
-    double width = boundRect.width;
-    double height = boundRect.height;
+    width = boundRect.width;
+    height = boundRect.height;
+    x = boundRect.x;
+    y = boundRect.y;
     double circ = 4*M_PI*area/(perimeter*perimeter);
     double angle = -1;
     double ex = -1;
@@ -98,9 +99,22 @@ vector<double> get_shapes(vector<Point> cc,Mat mask){
         round = eminor/emajor;
         ar = emajor/eminor;
     }
-    double shapes[18] = {area,hull_area,solidity,perimeter,width,height,cmx,cmy,hull_verticies,ex,ey,emajor,eminor,angle,eccen,circ,round,ar};
-    vector<double> shapes_v(shapes,shapes+18);
+    double shapes[20] = {area,hull_area,solidity,perimeter,width,height,cmx,cmy,hull_verticies,ex,ey,emajor,eminor,angle,eccen,circ,round,ar,x,y};
+    vector<double> shapes_v(shapes,shapes+20);
     return shapes_v;
+}
+
+Mat ComputerVision::drawShapes(Mat org, vector<Point> cc){
+    vector<vector<Point>> tmp;
+    vector<vector<Point>> tmp1;
+    tmp.push_back(hull);
+    tmp1.push_back(cc);
+    drawContours(org, tmp1,-1,Scalar(0,0,255),1);
+    drawContours(org, tmp,-1,Scalar(255,0,0),1);
+    cv::line(org, Point(x,y), Point(x+width,y), Scalar(0,0,255),2);
+    cv::line(org,Point(cmx,y),Point(cmx,y+height),Scalar(0,0,255),2);
+    cv::circle(org, Point(cmx,cmy), 10, Scalar(0,0,255),2);
+    return org;
 }
 
 Mat get_color(Mat img,Mat mask){
@@ -122,37 +136,61 @@ Mat get_color(Mat img,Mat mask){
 
 Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
 
-    vector<Mat> bgr_planes;
-    split(img,bgr_planes);
-    int histSize = 256;
-    float range[] = {0,256};
-    const float* histRange = {range};
-    bool uniform = true; bool accumulate = false;
-    Mat b_hist, g_hist, r_hist;
+    const size_t number_of_channels = img.channels();
+    const cv::Scalar background_color(0,0,0);
 
-    calcHist( &bgr_planes[0], 1, 0, mask, b_hist, 1, &histSize, &histRange, uniform, accumulate );
-    calcHist( &bgr_planes[1], 1, 0, mask, g_hist, 1, &histSize, &histRange, uniform, accumulate );
-    calcHist( &bgr_planes[2], 1, 0, mask, r_hist, 1, &histSize, &histRange, uniform, accumulate );
+    vector<Mat> split;
+    cv::split(img,split);
 
-    int hist_w = 321; int hist_h = 111;
-    int bin_w = cvRound( (double) hist_w/histSize );
+    const int height = 480;
+    const int width = 640;
+    const int histogram_size = 256;
+    const float range[] = {0,255};
+    const float * ranges = {range};
+    const bool uniform = true;
+    const bool accumulate = false;
 
-    Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 0,0,0) );
-
-    for( int i = 1; i < histSize; i++ )
+    const int margin = 3;
+    const int min_y = margin;
+    const int max_y = height - margin;
+    const int thickness = 1;
+    const int line_type = LINE_AA;
+    const float bin_width = static_cast<float>(width)/static_cast<float>(histogram_size);
+    Mat dst(height,width,CV_8UC3,background_color);
+    cv::Scalar colors[] =
     {
-            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(b_hist.at<float>(i-1)) ) ,
-                 Point( bin_w*(i), hist_h - cvRound(b_hist.at<float>(i)) ),
-                 Scalar( 255, 0, 0), 2, 8, 0  );
-            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(g_hist.at<float>(i-1)) ) ,
-                 Point( bin_w*(i), hist_h - cvRound(g_hist.at<float>(i)) ),
-                 Scalar( 0, 255, 0), 2, 8, 0  );
-            line( histImage, Point( bin_w*(i-1), hist_h - cvRound(r_hist.at<float>(i-1)) ) ,
-                 Point( bin_w*(i), hist_h - cvRound(r_hist.at<float>(i)) ),
-                 Scalar( 0, 0, 255), 2, 8, 0  );
+        {255,0,0},
+        {0,255,0},
+        {0,0,255}
+    };
+
+    for (size_t idx=0; idx < split.size(); idx++)
+    {
+        const cv::Scalar colour = colors[idx % 3];
+
+        cv::Mat & m = split[idx];
+
+        cv::Mat histogram;
+        cv::calcHist(&m, 1, 0, mask, histogram, 1, &histogram_size, &ranges, uniform, accumulate);
+
+        cv::normalize(histogram, histogram, 0, dst.rows, cv::NORM_MINMAX);
+
+        for (int i = 1; i < histogram_size; i++)
+        {
+            const int x1 = std::round(bin_width * (i - 1));
+            const int x2 = std::round(bin_width * (i - 0));
+
+            const int y1 = std::clamp(height - static_cast<int>(std::round(histogram.at<float>(i - 1))), min_y, max_y);
+            const int y2 = std::clamp(height - static_cast<int>(std::round(histogram.at<float>(i - 0))), min_y, max_y);
+
+            cv::line(dst, cv::Point(x1, y1), cv::Point(x2, y2), colour, thickness, line_type);
+        }
     }
 
-    return histImage;
+    return dst;
+
+
+
 
 }
 
@@ -171,6 +209,13 @@ Mat ComputerVision::remove_background(Mat img){
     dilate(pot_or, pot_dilate, Mat(), Point(-1, -1), 2, 1, 1);
     Mat pot_erode;
     erode(pot_dilate,pot_erode, Mat(), Point(-1, -1), 3, 1, 1);
+    Mat pot_roi;
+    vector<Point> cc_pot = keep_roi(pot_erode,Point(300,100),Point(1000,650),pot_roi);
+    return pot_roi;
+}
 
-    return pot_erode;
+vector<Point> ComputerVision::get_cc(Mat img){
+    Mat temp;
+    vector<Point> cc_pot = keep_roi(img,Point(300,100),Point(1000,650),temp);
+    return cc_pot;
 }

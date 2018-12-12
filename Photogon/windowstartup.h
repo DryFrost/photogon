@@ -22,6 +22,8 @@ private slots:
 
     void on_commandLinkButton_clicked();
 
+    void on_openProjectButton_clicked();
+
 private:
     Ui::windowStartup *ui;
 };

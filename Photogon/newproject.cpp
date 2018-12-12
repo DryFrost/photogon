@@ -25,7 +25,7 @@ void newProject::on_setDirectoryButton_clicked()
                                                  "/home",
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
-    qDebug() << dir;
+    //qDebug() << dir;
 }
 
 void newProject::on_pushButton_2_clicked()
@@ -42,15 +42,23 @@ void newProject::on_commandLinkButton_clicked()
 void newProject::on_pushButton_clicked()
 {
     ProjectName = ui->lineEdit->text();
+    int num = 0;
+    int trial = 0;
     QString ProjectDir = dir+"/"+ProjectName+".ini";
     QSettings setup(ProjectDir,QSettings::IniFormat);
+    QSettings internal("ProjectDir.ini",QSettings::IniFormat);
+    internal.setValue("projectDir",QVariant::fromValue(ProjectDir));
+    internal.setValue("projectDirA",QVariant::fromValue(dir));
     setup.setValue("projectName",QVariant::fromValue(ProjectName));
     setup.setValue("numTreatments",QVariant::fromValue(numTreatments));
     setup.setValue("numSamples",QVariant::fromValue(numSamples));
     setup.setValue("projectDir",QVariant::fromValue(dir));
     setup.setValue("treatmentList",QVariant::fromValue(treatmentList));
+    setup.setValue("num",QVariant::fromValue(num));
+    setup.setValue("numS",QVariant::fromValue(num));
+    setup.setValue("trial",QVariant::fromValue(trial));
     //new theMainWindow();
-    //close();
+    close();
 }
 
 void newProject::on_pushButton_3_clicked()
