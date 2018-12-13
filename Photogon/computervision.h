@@ -6,11 +6,11 @@ using namespace std;
 class ComputerVision
 {
 public:
-    Mat remove_background(Mat img);
-    Mat get_RGB_HIST(Mat img, Mat mask);
+    Mat remove_background(const Mat& img);
+    Mat get_RGB_HIST(const Mat& img, const Mat& mask);
     vector<Point> get_cc(Mat img);
-    vector<double> get_shapes(vector<Point> cc,Mat mask);
-    Mat drawShapes(Mat img, vector<Point> cc);
+    vector<double> get_shapes(const vector<Point>& cc,const Mat& mask);
+    Mat drawShapes(Mat img, const vector<Point>& cc);
 private:
     vector<Point>hull;
     double x;

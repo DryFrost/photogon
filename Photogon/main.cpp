@@ -9,11 +9,11 @@ int main(int argc, char *argv[])
     //MainWindow w;
     //w.init();
     //w.show();
-    a.setOrganizationName("MyOrganization");
-    a.setOrganizationDomain("MyDomain");
-    a.setApplicationName("MyAppName");
+    QApplication::setOrganizationName("MyOrganization");
+    QApplication::setOrganizationDomain("MyDomain");
+    QApplication::setApplicationName("MyAppName");
     new theMainWindow();
 
 
-    return a.exec();
+    return QApplication::exec();
 }

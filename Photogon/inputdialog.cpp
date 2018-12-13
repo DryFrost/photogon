@@ -8,18 +8,18 @@
 InputDialog::InputDialog(QWidget *parent,int numb) : QDialog(parent)
 {
 
-    QFormLayout *lytMain = new QFormLayout(this);
+    auto *lytMain = new QFormLayout(this);
 
     for (int i = 0; i < numb; ++i)
     {
         QLabel *tLabel = new QLabel(QString("Treatment_%1:").arg(i), this);
-        QLineEdit *tLine = new QLineEdit(this);
+        auto *tLine = new QLineEdit(this);
         lytMain->addRow(tLabel, tLine);
 
         fields << tLine;
     }
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox
+    auto *buttonBox = new QDialogButtonBox
             ( QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
               Qt::Horizontal, this );
     lytMain->addWidget(buttonBox);
@@ -37,7 +37,7 @@ InputDialog::InputDialog(QWidget *parent,int numb) : QDialog(parent)
 
 QStringList InputDialog::getStrings(QWidget *parent,int numb, bool *ok)
 {
-    InputDialog *dialog = new InputDialog(parent,numb);
+    auto *dialog = new InputDialog(parent,numb);
 
     QStringList list;
 

@@ -29,7 +29,7 @@ void cameraDiscovery::on_pushButton_2_clicked()
     udp->deviceDiscover();
 }
 
-void cameraDiscovery::onUDPReceived(QString address){
+void cameraDiscovery::onUDPReceived(const QString address){
     qDebug() << "Updating List";
     if(!currentIPs.contains(address)){
         currentIPs.append(address);

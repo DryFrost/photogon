@@ -1,19 +1,17 @@
 #include "worker.h"
-
-#include "worker.h"
 #include <QDebug>
 #include <QThread>
 #include <QTime>
-Worker::Worker(QString path, int id, bool b) : filepath(path), index(id), Stop(b)
+#include <utility>
+Worker::Worker(QString path, int id, bool b) : filepath(std::move(std::move(path))), index(id), Stop(b)
 {
 
 }
 
 Worker::~Worker()
-{
-}
+= default;
 
-void Worker::readVideo(QString path)
+void Worker::readVideo(const QString path)
 {
     if (path.length() > 0)
         filepath = path;

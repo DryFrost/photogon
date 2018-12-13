@@ -3,9 +3,10 @@
 #include <opencv2/features2d.hpp>
 #include <iostream>
 #include <fstream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
-#include <math.h>
+#include <utility>
+#include <cmath>
 
 
 using namespace cv;
@@ -21,7 +22,7 @@ Mat fill_holes(Mat src){
     }
     return dst;
 }
-vector<Point> keep_roi(Mat img,Point tl, Point br, Mat &mask){
+vector<Point> keep_roi(Mat img,const Point& tl, const Point& br, Mat &mask){
     //-- Get contours of mask
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
@@ -42,8 +43,8 @@ vector<Point> keep_roi(Mat img,Point tl, Point br, Mat &mask){
         for(unsigned int j=0; j<contours[i].size(); j++){
             int test = pointPolygonTest(contours_roi[0],Point2f(contours[i][j]),false);
             if(test==1 || test == 0){
-                for(unsigned int k=0; k<contours[i].size(); k++){
-                    cc.push_back(contours[i][k]);
+                for(const auto & k : contours[i]){
+                    cc.push_back(k);
                 }
                 drawContours(kept, contours, i, 255, CV_FILLED);
                 break;
@@ -56,7 +57,7 @@ vector<Point> keep_roi(Mat img,Point tl, Point br, Mat &mask){
     mask = kept_mask;
     return cc;
 }
-vector<double> ComputerVision::get_shapes(vector<Point> cc,Mat mask){
+vector<double> ComputerVision::get_shapes(const vector<Point>& cc,const Mat& mask){
     //-- Get measurements
     Moments mom = moments(mask,true);
     double area = mom.m00;
@@ -104,7 +105,7 @@ vector<double> ComputerVision::get_shapes(vector<Point> cc,Mat mask){
     return shapes_v;
 }
 
-Mat ComputerVision::drawShapes(Mat org, vector<Point> cc){
+Mat ComputerVision::drawShapes(Mat org, const vector<Point>& cc){
     vector<vector<Point>> tmp;
     vector<vector<Point>> tmp1;
     tmp.push_back(hull);
@@ -117,7 +118,7 @@ Mat ComputerVision::drawShapes(Mat org, vector<Point> cc){
     return org;
 }
 
-Mat get_color(Mat img,Mat mask){
+Mat get_color(const Mat& img,const Mat& mask){
     Mat composite;
     cvtColor(img,composite,COLOR_BGR2HSV);
     vector<Mat> channels1;
@@ -129,12 +130,12 @@ Mat get_color(Mat img,Mat mask){
     const float *ranges = {hranges};
 
     //-- Compute the histogram
-    calcHist(&channels1[0],1,0,mask,hist, dims, &histSize, &ranges    ,true ,false);
+    calcHist(&channels1[0],1,nullptr,mask,hist, dims, &histSize, &ranges    ,true ,false);
 
     return hist;
 }
 
-Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
+Mat ComputerVision::get_RGB_HIST(const Mat& img, const Mat& mask){
 
     const size_t number_of_channels = img.channels();
     const cv::Scalar background_color(0,0,0);
@@ -171,7 +172,7 @@ Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
         cv::Mat & m = split[idx];
 
         cv::Mat histogram;
-        cv::calcHist(&m, 1, 0, mask, histogram, 1, &histogram_size, &ranges, uniform, accumulate);
+        cv::calcHist(&m, 1, nullptr, mask, histogram, 1, &histogram_size, &ranges, uniform, accumulate);
 
         cv::normalize(histogram, histogram, 0, dst.rows, cv::NORM_MINMAX);
 
@@ -194,7 +195,7 @@ Mat ComputerVision::get_RGB_HIST(Mat img, Mat mask){
 
 }
 
-Mat ComputerVision::remove_background(Mat img){
+Mat ComputerVision::remove_background(const Mat& img){
     Mat dest_lab;
     cvtColor(img, dest_lab, CV_BGR2Lab);
     vector<Mat> channels_lab;
@@ -216,6 +217,6 @@ Mat ComputerVision::remove_background(Mat img){
 
 vector<Point> ComputerVision::get_cc(Mat img){
     Mat temp;
-    vector<Point> cc_pot = keep_roi(img,Point(300,100),Point(1000,650),temp);
+    vector<Point> cc_pot = keep_roi(std::move(img),Point(300,100),Point(1000,650),temp);
     return cc_pot;
 }

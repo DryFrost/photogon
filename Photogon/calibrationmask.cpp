@@ -29,8 +29,8 @@ void calibrationMask::init()
 
     numCams = 1;
 
-    int row = 0, col = 0;
-    for (int i = 0; i < numCams; i++)
+  const int row = 0, col = 0;
+    for (int i = 0; i < numCams;i++)
     {
         threads[i] = new QThread;
         workers[i] = new Worker(QString("http://10.106.47.112:8081/live.mpg"), i);
@@ -51,7 +51,7 @@ void calibrationMask::init()
 
 }
 
-void calibrationMask::displayFrame(cv::Mat frame, int index)
+void calibrationMask::displayFrame(const cv::Mat frame, int  index)
 {
     cv::Size size(171,189);
     Mat org;

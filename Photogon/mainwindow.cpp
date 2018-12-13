@@ -31,7 +31,7 @@ void MainWindow::init()
 
     numCams = 1;
 
-    int row = 0, col = 0;
+  const   int row = 0, col = 0;
     for (int i = 0; i < numCams; i++)
     {
         threads[i] = new QThread;

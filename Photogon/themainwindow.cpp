@@ -41,7 +41,7 @@ void theMainWindow::on_actionNew_Project_triggered()
     new newProject();
 }
 
-void theMainWindow::displayFrame(cv::Mat frame, int index)
+void theMainWindow::displayFrame(cv::Mat frame, int  index)
 {
     Frm = frame;
     cv::Size size(256,200);
@@ -201,7 +201,7 @@ void theMainWindow::on_skip_clicked()
 
 void theMainWindow::on_commandLinkButton_clicked()
 {
-    showMask *mshowMask = new showMask(this);
+    auto *mshowMask = new showMask(this);
     connect(this,SIGNAL(SendMask(cv::Mat)),mshowMask,SLOT(updateMask(cv::Mat)));
     mshowMask->show();
 
@@ -209,7 +209,7 @@ void theMainWindow::on_commandLinkButton_clicked()
 
 void theMainWindow::on_commandLinkButton_2_clicked()
 {
-    showHistogram *mshowHist = new showHistogram(this);
+    auto *mshowHist = new showHistogram(this);
     connect(this,SIGNAL(SendHist(cv::Mat)),mshowHist,SLOT(updateHist(cv::Mat)));
     mshowHist->show();
 
@@ -217,7 +217,7 @@ void theMainWindow::on_commandLinkButton_2_clicked()
 
 void theMainWindow::on_commandLinkButton_3_clicked()
 {
-    showShape *mshowShape = new showShape(this);
+    auto *mshowShape = new showShape(this);
     connect(this,SIGNAL(SendShape(cv::Mat)),mshowShape,SLOT(updateShape(cv::Mat)));
     mshowShape->show();
 }
