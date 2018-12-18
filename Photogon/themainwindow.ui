@@ -360,9 +360,16 @@
     </property>
     <addaction name="uiActionStartupDialog"/>
    </widget>
+   <widget class="QMenu" name="menuParameters">
+    <property name="title">
+     <string>Parameters</string>
+    </property>
+    <addaction name="actionEdit_ROI"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCameras"/>
    <addaction name="menuView"/>
+   <addaction name="menuParameters"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -403,6 +410,11 @@
   <action name="actionSet_up_Cameras">
    <property name="text">
     <string>Set up Cameras</string>
+   </property>
+  </action>
+  <action name="actionEdit_ROI">
+   <property name="text">
+    <string>Edit ROI</string>
    </property>
   </action>
  </widget>

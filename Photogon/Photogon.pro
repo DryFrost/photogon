@@ -53,7 +53,9 @@ SOURCES += \
     inputdialog.cpp \
     showmask.cpp \
     showhistogram.cpp \
-    showshape.cpp
+    showshape.cpp \
+    editroi.cpp \
+    editmask.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -69,7 +71,9 @@ HEADERS += \
     inputdialog.h \
     showmask.h \
     showhistogram.h \
-    showshape.h
+    showshape.h \
+    editroi.h \
+    editmask.h
 
 FORMS += \
         mainwindow.ui \
@@ -82,7 +86,9 @@ FORMS += \
     cameradiscovery.ui \
     showmask.ui \
     showhistogram.ui \
-    showshape.ui
+    showshape.ui \
+    editroi.ui \
+    editmask.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

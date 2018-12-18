@@ -221,3 +221,8 @@ void theMainWindow::on_commandLinkButton_3_clicked()
     connect(this,SIGNAL(SendShape(cv::Mat)),mshowShape,SLOT(updateShape(cv::Mat)));
     mshowShape->show();
 }
+
+void theMainWindow::on_actionEdit_ROI_triggered()
+{
+    new editROI();
+}
