@@ -226,3 +226,8 @@ void theMainWindow::on_actionEdit_ROI_triggered()
 {
     new editROI();
 }
+
+void theMainWindow::on_actionEdit_Mask_triggered()
+{
+    new editmask();
+}

@@ -16,6 +16,7 @@
 #include "showhistogram.h"
 #include "showshape.h"
 #include "editroi.h"
+#include "editmask.h"
 #define MAX_NUM_CAM 4
 namespace Ui {
 class theMainWindow;
@@ -80,6 +81,8 @@ private slots:
     void on_commandLinkButton_3_clicked();
 
     void on_actionEdit_ROI_triggered();
+
+    void on_actionEdit_Mask_triggered();
 
 private:
     Ui::theMainWindow *ui;

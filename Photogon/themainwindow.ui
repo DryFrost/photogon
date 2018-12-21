@@ -365,6 +365,7 @@
      <string>Parameters</string>
     </property>
     <addaction name="actionEdit_ROI"/>
+    <addaction name="actionEdit_Mask"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCameras"/>
@@ -415,6 +416,11 @@
   <action name="actionEdit_ROI">
    <property name="text">
     <string>Edit ROI</string>
+   </property>
+  </action>
+  <action name="actionEdit_Mask">
+   <property name="text">
+    <string>Edit Mask</string>
    </property>
   </action>
  </widget>
