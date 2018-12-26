@@ -261,11 +261,73 @@
        </item>
        <item>
         <widget class="QSlider" name="blurK">
+         <property name="minimum">
+          <number>1</number>
+         </property>
          <property name="maximum">
           <number>10</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QLabel" name="val1">
+         <property name="minimumSize">
+          <size>
+           <width>25</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val2">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val3">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val4">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val5">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val6">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="val7">
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
@@ -314,5 +376,118 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>thresholdLow</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val1</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>625</x>
+     <y>403</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>thresholdHigh</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val2</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>555</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>621</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b1Low</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val3</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>507</x>
+     <y>440</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>444</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b1High</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val4</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>559</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>620</x>
+     <y>465</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b2Low</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val5</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>532</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>619</x>
+     <y>485</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b2High</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val6</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>551</x>
+     <y>506</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>630</x>
+     <y>511</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blurK</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>val7</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>528</x>
+     <y>527</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>620</x>
+     <y>530</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

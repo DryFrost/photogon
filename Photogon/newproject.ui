@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>580</width>
-    <height>335</height>
+    <width>791</width>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>570</x>
      <y>10</y>
      <width>195</width>
      <height>231</height>
@@ -136,8 +136,8 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>250</y>
+     <x>570</x>
+     <y>260</y>
      <width>201</width>
      <height>80</height>
     </rect>
@@ -158,6 +158,44 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="qr">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>400</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>400</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>400</width>
+     <height>400</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>370</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GO</string>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -359,6 +359,10 @@
      <string>View</string>
     </property>
     <addaction name="uiActionStartupDialog"/>
+    <addaction name="actionShow_Mask"/>
+    <addaction name="actionShow_Histogram"/>
+    <addaction name="actionShow_Shapes"/>
+    <addaction name="actionFind_Devices"/>
    </widget>
    <widget class="QMenu" name="menuParameters">
     <property name="title">
@@ -366,6 +370,8 @@
     </property>
     <addaction name="actionEdit_ROI"/>
     <addaction name="actionEdit_Mask"/>
+    <addaction name="separator"/>
+    <addaction name="actionApply_Changes"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCameras"/>
@@ -421,6 +427,36 @@
   <action name="actionEdit_Mask">
    <property name="text">
     <string>Edit Mask</string>
+   </property>
+  </action>
+  <action name="actionApply_New_Changes">
+   <property name="text">
+    <string>Apply New Changes</string>
+   </property>
+  </action>
+  <action name="actionApply_Changes">
+   <property name="text">
+    <string>Apply Changes</string>
+   </property>
+  </action>
+  <action name="actionShow_Mask">
+   <property name="text">
+    <string>Show Mask</string>
+   </property>
+  </action>
+  <action name="actionShow_Histogram">
+   <property name="text">
+    <string>Show Histogram</string>
+   </property>
+  </action>
+  <action name="actionShow_Shapes">
+   <property name="text">
+    <string>Show Shapes</string>
+   </property>
+  </action>
+  <action name="actionFind_Devices">
+   <property name="text">
+    <string>Find Devices</string>
    </property>
   </action>
  </widget>

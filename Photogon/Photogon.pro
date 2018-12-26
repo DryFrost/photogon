@@ -55,7 +55,10 @@ SOURCES += \
     showhistogram.cpp \
     showshape.cpp \
     editroi.cpp \
-    editmask.cpp
+    editmask.cpp \
+    bitbuffer.cpp \
+    qrsegment.cpp \
+    qrcode.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -73,7 +76,10 @@ HEADERS += \
     showhistogram.h \
     showshape.h \
     editroi.h \
-    editmask.h
+    editmask.h \
+    bitbuffer.hpp \
+    qrsegment.hpp \
+    qrcode.hpp
 
 FORMS += \
         mainwindow.ui \
