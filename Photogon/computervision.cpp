@@ -213,10 +213,12 @@ Mat ComputerVision::remove_background(const Mat& img){
     Mat pot_roi;
     vector<Point> cc_pot = keep_roi(pot_erode,Point(300,100),Point(1000,650),pot_roi);
     return pot_roi;
+
 }
 
 vector<Point> ComputerVision::get_cc(Mat img){
     Mat temp;
     vector<Point> cc_pot = keep_roi(std::move(img),Point(300,100),Point(1000,650),temp);
     return cc_pot;
+
 }

@@ -17,6 +17,7 @@
 #include "showshape.h"
 #include "editroi.h"
 #include "editmask.h"
+#include "qrgenerate.h"
 #define MAX_NUM_CAM 4
 namespace Ui {
 class theMainWindow;

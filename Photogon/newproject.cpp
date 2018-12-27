@@ -26,6 +26,17 @@ void newProject::on_setDirectoryButton_clicked()
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
     //qDebug() << dir;
+
+
+
+
+    ui->setDirectoryButton->setEnabled(false);
+    ui->lineEdit->setEnabled(true);
+    ui->pushButton_3->setEnabled(true);
+    ui->spinBox->setEnabled(true);
+    ui->spinBox_2->setEnabled(true);
+
+
 }
 
 void newProject::on_pushButton_2_clicked()
@@ -41,15 +52,10 @@ void newProject::on_commandLinkButton_clicked()
 
 void newProject::on_pushButton_clicked()
 {
-    ProjectName = ui->lineEdit->text();
+
     int num = 0;
     int trial = 0;
-    QString ProjectDir = dir+"/"+ProjectName+".ini";
     QSettings setup(ProjectDir,QSettings::IniFormat);
-    QSettings internal("ProjectDir.ini",QSettings::IniFormat);
-    internal.setValue("projectDir",QVariant::fromValue(ProjectDir));
-    internal.setValue("projectDirA",QVariant::fromValue(dir));
-    setup.setValue("projectName",QVariant::fromValue(ProjectName));
     setup.setValue("numTreatments",QVariant::fromValue(numTreatments));
     setup.setValue("numSamples",QVariant::fromValue(numSamples));
     setup.setValue("projectDir",QVariant::fromValue(dir));
@@ -72,7 +78,38 @@ void newProject::on_pushButton_3_clicked()
 
 }
 
-void newProject::on_pushButton_4_clicked()
+void newProject::on_checkQR_clicked()
+{
+  if(ui->checkQR->isChecked()){
+      ui->CreateQRCode->setEnabled(true);
+      ui->pushButton_3->setEnabled(false);
+      ui->spinBox->setEnabled(false);
+      ui->spinBox_2->setEnabled(false);
+
+    }else {
+      ui->pushButton_3->setEnabled(true);
+      ui->spinBox->setEnabled(true);
+      ui->spinBox_2->setEnabled(true);
+      ui->CreateQRCode->setEnabled(false);
+}
+}
+
+void newProject::on_lineEdit_returnPressed()
+{
+    ui->checkQR->setEnabled(true);
+}
+
+void newProject::on_CreateQRCode_clicked()
 {
 
+    QSettings internal("ProjectDir.ini",QSettings::IniFormat);
+    internal.setValue("projectDirA",QVariant::fromValue(dir));
+    ProjectName = ui->lineEdit->text();
+    ProjectDir = dir+"/"+ProjectName+".ini";
+    internal.setValue("projectDir",QVariant::fromValue(ProjectDir));
+    QSettings setup(ProjectDir,QSettings::IniFormat);
+    setup.setValue("projectName",QVariant::fromValue(ProjectName));
+
+
+    new QRGenerate();
 }

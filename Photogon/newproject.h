@@ -17,6 +17,7 @@ public:
     ~newProject();
     QString ProjectName;
     QString dir;
+    QString ProjectDir;
     int numTreatments;
     int numSamples;
     QStringList treatmentList;
@@ -34,7 +35,11 @@ private slots:
 
     void on_pushButton_3_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_checkQR_clicked();
+
+    void on_lineEdit_returnPressed();
+
+    void on_CreateQRCode_clicked();
 
 private:
     Ui::newProject *ui;

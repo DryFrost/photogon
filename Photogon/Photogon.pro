@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT += network
+QT += svg
 QT_CONFIG -= no-pkg-config
 
 CONFIG += link_pkgconfig
@@ -58,7 +59,8 @@ SOURCES += \
     editmask.cpp \
     bitbuffer.cpp \
     qrsegment.cpp \
-    qrcode.cpp
+    qrcode.cpp \
+    qrgenerate.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -79,7 +81,8 @@ HEADERS += \
     editmask.h \
     bitbuffer.hpp \
     qrsegment.hpp \
-    qrcode.hpp
+    qrcode.hpp \
+    qrgenerate.h
 
 FORMS += \
         mainwindow.ui \
@@ -94,7 +97,8 @@ FORMS += \
     showhistogram.ui \
     showshape.ui \
     editroi.ui \
-    editmask.ui
+    editmask.ui \
+    qrgenerate.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
